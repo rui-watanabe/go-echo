@@ -1,7 +1,8 @@
 package main
 
 import (
-	"go-echo/database"
+	"go-echo/models"
+	"go-echo/routers"
 	"net/http"
 
 	"github.com/labstack/echo"
@@ -12,10 +13,7 @@ func hello(c echo.Context) error {
 }
 
 func main() {
-
-	e := echo.New()
-
-	e.GET("/", hello)
-
-	database.Connect()
+	models.Connect()
+	e := routers.NewRouter()
+	e.Start(":8080")
 }
